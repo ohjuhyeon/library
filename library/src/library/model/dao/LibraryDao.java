@@ -2,6 +2,7 @@ package library.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,6 +29,7 @@ public class LibraryDao {
 
 		Connection conn = null;
 		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "SELECT * FROM BOOK";
 
@@ -520,11 +522,8 @@ public class LibraryDao {
 		Connection conn = null;
 		Statement stmt = null;
 
-		String query = "INSERT INTO LIBRARY VALUES(" 
-				+ library.getLeaseNo() + "," 
-				+ library.getBookNo() + ","
-				+ "'" + library.getUserID() + "'," 
-				+ "SYSDATE, SYSDATE+2)";
+		String query = "INSERT INTO LIBRARY VALUES(" + library.getLeaseNo() + "," + library.getBookNo() + "," + "'"
+				+ library.getUserID() + "'," + "SYSDATE, SYSDATE+2)";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "LIBRARY", "LIBRARY");
